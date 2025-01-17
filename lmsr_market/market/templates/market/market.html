@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>LMSR Market</h1>
+  <h2>Current Prices</h2>
+  <ul>
+    {% for outcome, price in prices.items %}
+      <li>{{ outcome }}: {{ price }}</li>
+    {% endfor %}
+  </ul>
+  <h2>Your Transactions</h2>
+  <ul>
+    {% for transaction in user_transactions %}
+      <li>{{ transaction.timestamp }}: {{ transaction.transaction_type }} {{ transaction.shares }} shares of {{ transaction.outcome }} for {{ transaction.cost }}</li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'buy_shares' %}">Buy Shares</a>
+  <a href="{% url 'sell_shares' %}">Sell Shares</a>
+{% endblock %}
