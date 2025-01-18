@@ -1,9 +1,14 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
-from .models import LMSRMarket, Transaction
+#from .models import LMSRMarket, Transaction
 from .forms import BuySharesForm, SellSharesForm, SignUpForm
 import math
+from django.http import HttpResponse
+
+from django.apps import apps
+
+LMSRMarket = apps.get_model('market', 'LMSRMarket', 'Transaction')
 
 # lmsr_market/market/views.py
 
@@ -12,9 +17,6 @@ from django.shortcuts import render
 
 @login_required
 # lmsr_market/market/views.py
-
-
-
 def market_view(request):
     market_data = [
         {"question": "Will Trump invade Canada before the end of 2025?", "outcomes": ["Yes, He will", "No, He won't", "3rd world war will occur before"]},
@@ -103,3 +105,21 @@ def sell_shares_logic(market, outcome, delta_q):
 def cost_function(market):
     total_exp_q = sum(math.exp(q_i / market.b) for q_i in market.q.values())
     return market.b * math.log(total_exp_q)
+
+# market/views.py
+
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
+
+def submit_prediction(request):
+    if request.method == 'POST':
+        # Process the form data here
+        stock = request.POST.get('stock')
+        shares = request.POST.get('shares')
+        # Add your form processing logic here
+
+        # Redirect to a success page or render a response
+        return HttpResponse("Prediction submitted successfully!")
+
+    # If GET request, you might want to redirect to another page or show an error
+    return redirect('market:home')  # Ensure 'home' is a valid name in your urls.py

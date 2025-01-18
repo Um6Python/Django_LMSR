@@ -1,19 +1,62 @@
+/* General styles */
 body {
     font-family: Arial, sans-serif;
+    margin: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+html, body {
+    width: 100%;
+}
+
+/* Jumbotron styles */
 .jumbotron {
     background-color: #f8f9fa;
     padding: 2rem;
     border-radius: 0.3rem;
 }
 
+/* Button styles */
 .btn-primary {
     background-color: #007bff;
     border-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.3rem;
 }
 
 .btn-secondary {
     background-color: #6c757d;
     border-color: #6c757d;
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.3rem;
+}
+
+/* Centered image container styles */
+.centered-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff; /* Optional background color */
+    padding: 20px; /* Ensures equal margins around the border */
+}
+
+.resized-image {
+    max-width: 80%; /* Restricts the image width to 80% of the container */
+    max-height: 60%; /* Restricts the image height to 60% of the container */
+    width: 150px; /* Ensures a fixed width when needed */
+    height: auto; /* Maintain aspect ratio */
+    border: 10px solid black; /* Add a black border larger than the image */
+    border-radius: 15px; /* Rounded edges */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    margin: 20px; /* Adds empty space between the image and its border */
+    padding: 0; /* Ensures no padding inside the image element */
 }

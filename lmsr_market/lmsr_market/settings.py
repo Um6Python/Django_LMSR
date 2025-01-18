@@ -89,6 +89,7 @@ TEMPLATES = [
 WSGI_APPLICATION = "lmsr_market.wsgi.application"
 
 
+
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
@@ -157,9 +158,3 @@ LOGIN_REDIRECT_URL = '/market/'  # Redirect to the market view after login
 
 # If you have a custom static files directory
 
-
-# Make sure the `django.contrib.staticfiles` app is included in your INSTALLED_APPS
-INSTALLED_APPS = [
-    # Other apps...
-    
-]
