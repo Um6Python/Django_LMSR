@@ -1,0 +1,28 @@
+<!-- lmsr_market/market/templates/market/market_detail.html -->
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ market.question }}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>{{ market.question }}</h1>
+        <img src="{% static 'images/Trump_canada.jpg' %}" alt="Market" style="width:100%;max-width:300px;">
+        <p>End Date: {{ market.end_date }}</p>
+        <h2>Outcomes:</h2>
+        <ul>
+            {% for outcome in market.outcomes %}
+                <li>{{ outcome }}</li>
+            {% endfor %}
+        </ul>
+        <!-- Example button to demonstrate JavaScript functionality -->
+        <button id="myButton">Click Me</button>
+    </div>
+    <script src="{% static 'js/scripts.js' %}"></script> <!-- Include scripts.js file -->
+</body>
+</html>

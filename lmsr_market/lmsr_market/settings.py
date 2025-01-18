@@ -63,14 +63,17 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "lmsr_market.urls"
 
+import os
+from pathlib import Path
 
-
-
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [
+            '/Users/thzaamoun/Library/CloudStorage/OneDrive-UniversitéMohammedVIPolytechnique/S1/HyperMind - Emile/Django_LMSR/lmsr_market/market/templates/market'
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -133,6 +136,10 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'lmsr_market/static'),
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -140,3 +147,19 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # lmsr_market/settings.py
 LOGIN_REDIRECT_URL = '/market/'  # Redirect to the market view after login
+
+
+
+
+############
+
+# Static files (CSS, JavaScript, Images)
+
+# If you have a custom static files directory
+
+
+# Make sure the `django.contrib.staticfiles` app is included in your INSTALLED_APPS
+INSTALLED_APPS = [
+    # Other apps...
+    
+]

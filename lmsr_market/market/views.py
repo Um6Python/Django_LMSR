@@ -5,22 +5,25 @@ from .models import LMSRMarket, Transaction
 from .forms import BuySharesForm, SellSharesForm, SignUpForm
 import math
 
+# lmsr_market/market/views.py
+
+from django.shortcuts import render
+
 
 @login_required
+# lmsr_market/market/views.py
+
+
+
 def market_view(request):
-    market = LMSRMarket.objects.first()
-    if market is None:
-        # Render a template indicating no market is available
-        return render(request, 'market/no_market.html')  
-    
-    prices = calculate_prices(market)
-    user_transactions = Transaction.objects.filter(user=request.user, market=market)
-    context = {
-        'market': market,
-        'prices': prices,
-        'user_transactions': user_transactions,
-    }
-    return render(request, 'market/market.html', context)
+    market_data = [
+        {"question": "Will Trump invade Canada before the end of 2025?", "outcomes": ["Yes, He will", "No, He won't", "3rd world war will occur before"]},
+        # more market data...
+    ]
+
+    # Correct list access
+    market = {item['question']: item['outcomes'][1] for item in market_data}
+    return render(request, 'market/market_detail.html', {'market': market})
 
 def calculate_prices(market):
     if market is None or market.q is None:
@@ -30,6 +33,8 @@ def calculate_prices(market):
     return {outcome: exp_q[outcome] / total for outcome in market.q}
 
 
+def home(request):
+    return render(request, 'home.html')
 
 @login_required
 def profile(request):

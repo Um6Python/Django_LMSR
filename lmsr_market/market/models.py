@@ -27,3 +27,12 @@ class Transaction(models.Model):
     def __str__(self):
         return f"{self.user.username} - {self.market.name} - {self.outcome} - {self.transaction_type}"
     
+class Market(models.Model):
+    question = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+    end_date = models.DateField()
+    image_url = models.URLField(blank=True, null=True)  # Add an image URL field
+    outcomes = models.JSONField(default=list)  # Add a JSON field for outcomes
+
+    def __str__(self):
+        return self.question

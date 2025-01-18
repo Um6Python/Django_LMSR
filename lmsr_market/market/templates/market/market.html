@@ -1,19 +1,30 @@
-{% extends "base_generic.html" %}
+{% extends 'base.html' %}
+
+{% block title %}Market{% endblock %}
 
 {% block content %}
-  <h1>LMSR Market</h1>
-  <h2>Current Prices</h2>
-  <ul>
-    {% for outcome, price in prices.items %}
-      <li>{{ outcome }}: {{ price }}</li>
-    {% endfor %}
-  </ul>
-  <h2>Your Transactions</h2>
-  <ul>
-    {% for transaction in user_transactions %}
-      <li>{{ transaction.timestamp }}: {{ transaction.transaction_type }} {{ transaction.shares }} shares of {{ transaction.outcome }} for {{ transaction.cost }}</li>
-    {% endfor %}
-  </ul>
-  <a href="{% url 'buy_shares' %}">Buy Shares</a>
-  <a href="{% url 'sell_shares' %}">Sell Shares</a>
+<h2>Market</h2>
+{% if market %}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{ market.name }}</h5>
+            <p class="card-text">Current Prices:</p>
+            <ul class="list-group list-group-flush">
+                {% for outcome, price in prices.items %}
+                    <li class="list-group-item">{{ outcome }}: {{ price }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <h3>Your Transactions</h3>
+    <ul class="list-group">
+        {% for transaction in user_transactions %}
+            <li class="list-group-item">
+                {{ transaction.shares }} shares of {{ transaction.outcome }} at ${{ transaction.cost }}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No market available.</p>
+{% endif %}
 {% endblock %}
