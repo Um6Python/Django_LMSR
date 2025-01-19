@@ -1,0 +1,29 @@
+<!-- market/templates/market/submit_prediction.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Prediction</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <h2>Trump Invasion of Canada</h2>
+
+    <!-- Centering the image with a black border and rounded edges -->
+    <div class="centered-image-container">
+        <div class="image-wrapper">
+            <img src="https://www.politico.com/dims4/default/b30ed5d/2147483647/strip/true/crop/3381x2254+0+0/resize/1260x840!/quality/90/?url=https%3A%2F%2Fstatic.politico.com%2F9c%2Fa1%2Fbd09a0a2447d9aa2ee89df8dd6ae%2Fcanada-trump-military-spending-19976.jpg" alt="Canada Trump Military Spending" class="resized-image">
+        </div>
+    </div>
+
+    <p>What do you predict will be the outcomes of the Trump invasion of Canada? Make your predictions below:</p>
+
+    <form method="post" action="{% url 'market:submit_prediction' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit Prediction</button>
+    </form>
+</body>
+</html>

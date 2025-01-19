@@ -1,19 +1,15 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
-#from .models import LMSRMarket, Transaction
-from .forms import BuySharesForm, SellSharesForm, SignUpForm
+from .models import LMSRMarket, Transaction
+from .forms import BuySharesForm, SellSharesForm, SignUpForm, PredictionForm, Prediction
 import math
 from django.http import HttpResponse
-
+from django.contrib import messages
 from django.apps import apps
-
-LMSRMarket = apps.get_model('market', 'LMSRMarket', 'Transaction')
-
-# lmsr_market/market/views.py
-
 from django.shortcuts import render
 
+LMSRMarket = apps.get_model('market', 'LMSRMarket', 'Transaction')
 
 @login_required
 # lmsr_market/market/views.py
@@ -72,9 +68,6 @@ def sell_shares(request):
         form = SellSharesForm()
     return render(request, 'market/sell_shares.html', {'form': form})
 
-def home(request):
-    return render(request, 'home.html')
-
 
 def signup(request):
     if request.method == 'POST':
@@ -107,19 +100,18 @@ def cost_function(market):
     return market.b * math.log(total_exp_q)
 
 # market/views.py
-
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
+def home(request):
+    return render(request, 'market/home.html')
 
 def submit_prediction(request):
     if request.method == 'POST':
-        # Process the form data here
-        stock = request.POST.get('stock')
-        shares = request.POST.get('shares')
-        # Add your form processing logic here
+        form = PredictionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Prediction submitted successfully!")
+            return redirect('market:market_detail')
+    else:
+        form = PredictionForm()
 
-        # Redirect to a success page or render a response
-        return HttpResponse("Prediction submitted successfully!")
+    return render(request, 'market/submit_prediction.html', {'form': form})
 
-    # If GET request, you might want to redirect to another page or show an error
-    return redirect('market:home')  # Ensure 'home' is a valid name in your urls.py

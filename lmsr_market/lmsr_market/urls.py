@@ -18,11 +18,14 @@ from django.contrib import admin
 from django.urls import include, path
 from market import views as market_views
 
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),  # Ensure this line is present
     path('market/', include('market.urls')),
     path('', market_views.home, name='home'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/profile/', market_views.profile, name='profile'),
+    path('signup/', market_views.signup, name='signup'),
 ]
 

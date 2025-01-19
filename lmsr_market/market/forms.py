@@ -1,5 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
+from .models import Prediction
+
 
 NATURAL_CAUSES = 'He will die of Natural causes (Too old)'
 
@@ -33,3 +35,8 @@ class SignUpForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+    
+class PredictionForm(forms.ModelForm):
+    class Meta:
+        model = Prediction
+        fields = ['stock', 'shares']

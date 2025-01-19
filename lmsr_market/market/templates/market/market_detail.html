@@ -1,6 +1,7 @@
-<!-- lmsr_market/templates/market/market_detail.html -->
+<!-- market/templates/market/market_detail.html -->
 
 {% load static %}
+{% load messages %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -106,6 +107,23 @@
             color: #fff;
             cursor: pointer;
         }
+
+        .messages {
+            margin-bottom: 1rem;
+            width: 80%;
+        }
+
+        .alert {
+            padding: 0.5rem 1rem;
+            border-radius: 0.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
     </style>
 </head>
 <body>
@@ -132,14 +150,15 @@
         </div>
         
         <p>What do you predict will be the outcomes of the Trump invasion of Canada? Make your predictions below:</p>
-
+        
+        <!-- Form for users to make predictions -->
         <form class="prediction-form" action="{% url 'market:submit_prediction' %}" method="post">
             {% csrf_token %}
             <label for="stock">Select Stock:</label>
             <select id="stock" name="stock">
                 <option value="stock1">Canada: 51st state</option>
                 <option value="stock2">No</option>
-                <option value="stock3">Trump will die before, He's too old</option>
+                <option value="stock3">Trump will die before, He is too old</option>
             </select>
             
             <label for="shares">Number of Shares:</label>
@@ -147,6 +166,15 @@
             
             <button type="submit">Submit Prediction</button>
         </form>
+        
+        <!-- Display success messages -->
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="alert alert-success">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
     </div>
 </body>
 </html>
